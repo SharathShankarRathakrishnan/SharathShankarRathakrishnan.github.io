@@ -37,6 +37,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Touch trail support for mobile devices
+    let isTouching = false;
+    let touchX = 0;
+    let touchY = 0;
+    let touchTimer = 0;
+
+    document.addEventListener('touchstart', (e) => {
+        isTouching = true;
+        touchX = e.touches[0].clientX;
+        touchY = e.touches[0].clientY;
+        touchTimer = 0;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isTouching) return;
+        
+        touchX = e.touches[0].clientX;
+        touchY = e.touches[0].clientY;
+        
+        // Check if touch is over navigation
+        const navElement = document.querySelector('nav');
+        const navRect = navElement.getBoundingClientRect();
+        const isOverNav = touchX >= navRect.left && 
+                         touchX <= navRect.right &&
+                         touchY >= navRect.top && 
+                         touchY <= navRect.bottom;
+        
+        // Create bubbles at intervals on touch move - reduced frequency for mobile
+        touchTimer++;
+        if (touchTimer % 5 === 0 && !isOverNav) {
+            createBubble(touchX, touchY);
+        }
+    });
+
+    document.addEventListener('touchend', () => {
+        isTouching = false;
+    });
+
     // Create water bubble effect
     function createBubble(x, y) {
         const bubble = document.createElement('div');
@@ -366,4 +404,32 @@ document.addEventListener('DOMContentLoaded', () => {
     
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Run once on load
+    
+    // Bottom corner image - show when scrolling to bottom
+    const bottomImageContainer = document.getElementById('bottom-image-container');
+    
+    function handleBottomImage() {
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const pageHeight = document.documentElement.scrollHeight;
+        const threshold = 100; // pixels from bottom
+        
+        if (scrollPosition >= pageHeight - threshold) {
+            bottomImageContainer.classList.add('visible');
+        } else {
+            bottomImageContainer.classList.remove('visible');
+        }
+    }
+    
+    // Throttle scroll event for performance
+    let scrollThrottle;
+    window.addEventListener('scroll', () => {
+        if (scrollThrottle) return;
+        scrollThrottle = setTimeout(() => {
+            handleBottomImage();
+            scrollThrottle = null;
+        }, 100);
+    });
+    
+    // Check on load
+    handleBottomImage();
 });

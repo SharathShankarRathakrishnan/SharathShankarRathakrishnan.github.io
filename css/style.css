@@ -1203,6 +1203,39 @@ html {
     }
 }
 
+/* Bottom corner image - appears when scrolling to bottom */
+/* EDIT: Adjust size and position below */
+#bottom-image-container {
+    position: fixed;
+    /* EDIT: Adjust bottom position (distance from bottom edge) */
+    bottom: -17px;
+    /* EDIT: Adjust right position (distance from right edge) */
+    right: 0;
+    z-index: 200;
+    pointer-events: none;
+    transform: translateY(100%);
+    transition: transform 0.6s ease-out;
+}
+
+#bottom-image-container.visible {
+    transform: translateY(0);
+}
+
+#bottom-image {
+    /* EDIT: Change width to adjust image size (e.g., 150px, 250px, 300px) */
+    width: 100px;
+    height: auto;
+    /* EDIT: Adjust opacity (0.0 to 1.0, where 1.0 is fully opaque) */
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    #bottom-image {
+        /* EDIT: Mobile width */
+        width: 60px;
+    }
+}
+
 /* Hide body initially to prevent flash of content at wrong scroll position */
 body {
     opacity: 0;
