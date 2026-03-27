@@ -1223,16 +1223,16 @@ html {
 
 #bottom-image {
     /* EDIT: Change width to adjust image size (e.g., 150px, 250px, 300px) */
-    width: 100px;
+    width: 80px;
     height: auto;
     /* EDIT: Adjust opacity (0.0 to 1.0, where 1.0 is fully opaque) */
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 @media (max-width: 768px) {
     #bottom-image {
         /* EDIT: Mobile width */
-        width: 60px;
+        width: 40px;
     }
 }
 
