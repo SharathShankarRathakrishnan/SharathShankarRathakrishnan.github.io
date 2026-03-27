@@ -1,0 +1,1247 @@
+/* Reset and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    /* Position relative for logo absolute positioning */
+    position: relative;
+}
+
+/* SSR Initials Container - EDIT THESE VALUES TO CUSTOMIZE */
+.initials-container {
+    /* EDIT: Change position from left edge */
+    position: absolute;
+    left: 35px;
+    /* EDIT: Change top position */
+    top: 37px;
+    display: flex;
+    gap: 0;
+    z-index: 10;
+}
+
+/* Individual initial letter - EDIT THESE VALUES TO CUSTOMIZE */
+.initial-link {
+    /* EDIT: Change image size (width and height should match) */
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    opacity: 0;
+    /* EDIT: Change fade animation duration (0.5s = half second) */
+    transition: opacity 0.5s ease;
+    /* Remove any default spacing */
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    /* EDIT: Use negative margin to overlap letters (e.g., -10px) */
+    margin-right: -12px;
+}
+
+/* Remove margin from last letter */
+.initial-link:last-child {
+    margin-right: 0;
+}
+
+.initial-link.visible {
+    opacity: 1;
+}
+
+.initial-link img {
+    width: 35px;
+    height: 35px;
+    /* EDIT: Use 'cover' to force same size, 'contain' to preserve aspect ratio */
+    object-fit: contain;
+    display: block;
+    margin: 0;
+    padding: 0;
+    /* Ensure images don't exceed container */
+    max-width: 35px;
+    max-height: 35px;
+}
+
+/* Individual letter size overrides - EDIT THESE TO CHANGE EACH LETTER'S SIZE */
+/* First S - Sharath */
+#initial-s1 {
+    /* EDIT: Change size of first S */
+    width: 35px;
+    height: 35px;
+}
+#initial-s1 img {
+    width: 35px;
+    height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+/* Second S - Shankar */
+#initial-s2 {
+    /* EDIT: Change size of second S */
+    width: 35px;
+    height: 35px;
+}
+#initial-s2 img {
+    width: 35px;
+    height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+/* R - Rathakrishnan */
+#initial-r {
+    /* EDIT: Change size of R */
+    width: 35px;
+    height: 35px;
+}
+#initial-r img {
+    width: 35px;
+    height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+/* Navigation Menu */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px 0;
+}
+
+.nav-link {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: rgba(0, 200, 255, 0.8);
+    text-decoration: none;
+    position: relative;
+    padding: 10px 20px;
+    transition: color 0.3s ease;
+    /* Text-only styling - no button appearance */
+}
+
+.nav-link:hover {
+    color: rgba(0, 255, 200, 0.9);
+}
+
+/* Navigation Bubble Effect - Simplified */
+.nav-bubble {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(0, 200, 255, 0.2), rgba(0, 100, 200, 0.4), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    box-shadow: 0 0 30px rgba(0, 200, 255, 0.4), inset -15px -15px 30px rgba(255, 255, 255, 0.3);
+    z-index: 10;
+}
+
+.nav-link {
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.8);
+}
+.nav-link:hover .nav-bubble {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: textFloat 2s ease-in-out infinite;
+}
+
+/* Water-like floating animation */
+@keyframes textFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    25% {
+        transform: translate(-50%, -50%) translateY(-2px) translateX(1px);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-1px) translateX(-1px);
+    }
+    75% {
+        transform: translate(-50%, -50%) translateY(-3px) translateX(2px);
+    }
+}
+
+/* Navigation Bubble Burst Effect - Fixed */
+.nav-bubble.burst {
+    animation: bubbleInflatePop 0.8s ease-out forwards !important;
+}
+
+@keyframes bubbleInflatePop {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.3);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+    70% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.75);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+/* Navigation Splash Particles */
+.nav-splash {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, rgba(0, 200, 255, 0.9), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: navSplashBurst 1s ease-out forwards;
+    z-index: 5000;
+}
+
+@keyframes navSplashBurst {
+    0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.3) translate(var(--splash-x), var(--splash-y));
+    }
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+/* Hero Section Layout */
+#hero {
+    text-align: center;
+    /* Move hero section higher up on page */
+    margin-top: -80px;
+    /* Bring text above particle bubbles */
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Dynamic Cursor - Single cursor that moves between lines */
+.typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background-color: rgba(0, 200, 255, 0.9);
+    animation: cursor-blink 0.7s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+}
+
+@keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+#hero h2 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+}
+
+/* Greeting Text */
+.greeting-text {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    display: block;
+    min-height: 1.2em;
+    /* Remove any border that might show as cursor */
+    border: none;
+    border-right: none;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+/* Typing animation: 11 chars, types letter by letter */
+@keyframes typing-greeting {
+    from { width: 0; }
+    to { width: 11ch; }
+}
+
+/* 29 chars: Sharath Shankar Rathakrishnan */
+@keyframes typing-name {
+    from { width: 0; }
+    to { width: 29ch; }
+}
+
+/* 20 chars: King Of The Monsters */
+@keyframes typing-role {
+    from { width: 0; }
+    to { width: 20ch; }
+}
+
+/* Blinking Cursor Animations - each element has its own timing */
+@keyframes blink-cursor {
+    0%, 50% { border-color: rgba(0, 200, 255, 0.9); }
+    51%, 100% { border-color: transparent; }
+}
+
+@keyframes hide-cursor {
+    to { border-color: transparent; }
+}
+
+@keyframes blink {
+    0%, 50% { border-color: rgba(0, 200, 255, 0.9); }
+    51%, 100% { border-color: transparent; }
+}
+
+@keyframes blink-name {
+    0%, 50% { border-color: rgba(0, 200, 255, 0.9); }
+    51%, 100% { border-color: transparent; }
+}
+
+@keyframes blink-role {
+    0%, 50% { border-color: rgba(0, 200, 255, 0.9); }
+    51%, 100% { border-color: transparent; }
+}
+
+/* Portfolio Name Styling */
+.portfolio-name {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: rgba(0, 200, 255, 0.9);
+    margin: 10px 0;
+    letter-spacing: 2px;
+    display: block;
+    min-height: 1.2em;
+    /* Remove any border that might show as cursor */
+    border: none;
+    border-right: none;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 100, 200, 0.5);
+}
+
+/* Role Title Styling */
+.role-title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    margin: 10px 0 0 0;
+    letter-spacing: 1px;
+    display: block;
+    min-height: 1.2em;
+    /* Remove any border that might show as cursor */
+    border: none;
+    border-right: none;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.favicon-attribution {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 5px;
+}
+
+.favicon-attribution a {
+    color: rgba(0, 200, 255, 0.7);
+    text-decoration: none;
+}
+
+.favicon-attribution a:hover {
+    color: rgba(0, 200, 255, 0.9);
+}
+
+/* Cursor removed - using default system cursor */
+
+/* Particle Trail */
+#particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(0, 200, 255, 0.4), rgba(0, 100, 200, 0.6), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: bubbleFloat 3s ease-out forwards;
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.3), inset -10px -10px 20px rgba(255, 255, 255, 0.5);
+    /* Adjust width/height to change bubble size */
+    /* Change animation duration to modify float speed */
+    /* Modify box-shadow for glow intensity */
+}
+
+.splash-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(0, 200, 255, 0.8), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: splashBurst 0.8s ease-out forwards;
+    /* Adjust width/height to change splash particle size */
+    /* Change animation duration for splash speed */
+}
+
+@keyframes bubbleFloat {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(0) translateX(0);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1) translateY(-5px) translateX(0);
+    }
+    40% {
+        transform: scale(1.1) translateY(-12px) translateX(3px);
+    }
+    60% {
+        transform: scale(0.9) translateY(-20px) translateX(-2px);
+    }
+    80% {
+        opacity: 0.8;
+        transform: scale(1.2) translateY(-28px) translateX(4px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) translateY(-35px) translateX(0);
+    }
+    /* Adjust translateY values to change float height */
+    /* Modify translateX values for horizontal movement */
+    /* Change opacity values for fade timing */
+}
+
+@keyframes splashBurst {
+    0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.3) translate(var(--splash-x), var(--splash-y));
+    }
+    /* CSS custom properties --splash-x and --splash-y are set in JavaScript */
+    /* Adjust scale values for burst shrink effect */
+}
+
+/* Fixed Header */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3000;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 20px;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Translucent header when scrolled */
+.fixed-header.scrolled {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+/* Adjust body padding for fixed header */
+body {
+    padding-top: 80px;
+}
+
+/* Hero section adjustment for fixed header */
+#hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Skills Section - Transparent background, bubbles visible everywhere */
+#skills {
+    min-height: 100vh;
+    padding: 0 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+}
+
+.skills-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 40px 40px;
+}
+
+/* Skill items - transparent background, high z-index so bubbles go behind */
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    z-index: 3000;
+}
+
+.skill-item:hover {
+    border-color: rgba(0, 200, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.category-label {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(0, 200, 255, 0.9);
+    text-transform: uppercase;
+    width: 250px;
+    flex-shrink: 0;
+    line-height: 1.2;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 3000;
+}
+
+.skills-header {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 60px;
+    margin-top: 0;
+    text-align: left;
+    position: relative;
+    background: transparent;
+    padding: 10px 0;
+    border-radius: 8px;
+    display: block;
+    z-index: 3000;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.skills-header::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('../assets/images/gear_icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 15px;
+    margin-bottom:6px;
+    vertical-align: middle;
+    /* CHANGE width/height TO RESIZE THE GEAR ICON */
+    /* CHANGE margin-bottom TO MOVE GEAR ICON UP/DOWN (negative = up, positive = down) */
+}
+
+.skill-category {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    gap: 40px;
+}
+
+.category-label {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(0, 200, 255, 0.9);
+    text-transform: uppercase;
+    width: 250px;
+    flex-shrink: 0;
+    line-height: 1.2;
+    background: transparent;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 3000;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    flex: 1;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    z-index: 3000;
+}
+
+.skill-item:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(0, 200, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.skill-item img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.skill-item span {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+}
+
+/* Active nav link styling */
+.nav-link.active {
+    color: rgba(0, 255, 200, 0.9);
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Projects Section */
+#projects {
+    min-height: 100vh;
+    padding: 0 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+}
+
+.projects-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 40px 40px;
+}
+
+.projects-header {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 60px;
+    margin-top: 0;
+    text-align: left;
+    position: relative;
+    background: transparent;
+    padding: 10px 0;
+    border-radius: 8px;
+    display: block;
+    z-index: 3000;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.projects-header::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('../assets/images/gear_icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 15px;
+    margin-bottom: 6px;
+    vertical-align: middle;
+    /* CHANGE margin-bottom TO MOVE GEAR ICON UP/DOWN (negative = up, positive = down) */
+    /* width/height TO RESIZE THE GEAR ICON */
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Project Card */
+.project-card {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 200, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 200, 255, 0.1);
+}
+
+/* Project Image */
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    z-index: 3000;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+/* Project Content */
+.project-content {
+    padding: 20px;
+    position: relative;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(0, 200, 255, 0.9);
+    margin: 0 0 12px 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.8);
+    min-height: 48px;
+    line-height: 1.2;
+}
+
+.project-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    min-height: 63px;
+}
+
+/* Project Tags */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+    min-height: 60px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.tech-tag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    width: fit-content;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+/* Project Button Container */
+.project-btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Project Button */
+.project-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(0, 200, 255, 0.9);
+    text-decoration: none;
+    padding: 6px 16px;
+    border: 2px solid rgba(0, 200, 255, 0.4);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    width: fit-content;
+}
+
+.project-btn.github::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(1);
+}
+
+.project-btn.tableau::before {
+    content: '';
+    display: inline-block;
+    width: 14px;  /* CHANGE THIS VALUE TO ADJUST TABLEAU ICON SIZE */
+    height: 14px; /* CHANGE THIS VALUE TO ADJUST TABLEAU ICON SIZE */
+    background-image: url('../assets/images/tableau_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.project-btn:hover {
+    background: rgba(0, 200, 255, 0.2);
+    border-color: rgba(0, 200, 255, 0.8);
+    color: rgba(0, 255, 200, 0.9);
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-header {
+        font-size: 36px;
+    }
+}
+
+/* About Section */
+#about {
+    min-height: 100vh;
+    padding: 0 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+}
+
+.about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 40px 40px;
+}
+
+.about-header {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 60px;
+    margin-top: 0;
+    text-align: left;
+    position: relative;
+    background: transparent;
+    padding: 10px 0;
+    border-radius: 8px;
+    display: block;
+    z-index: 3000;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.about-header::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('../assets/images/gear_icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 15px;
+    margin-bottom: 6px;
+    vertical-align: middle;
+}
+
+.about-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.about-card {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 3000;
+}
+
+.about-card:hover {
+    border-color: rgba(0, 200, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.about-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.about-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: rgba(255, 255, 255, 0.9);
+}
+
+.about-label {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(0, 200, 255, 0.9);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.about-content p {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    margin: 0;
+}
+
+@media (max-width: 1200px) {
+    .about-cards {
+        justify-content: center;
+    }
+    
+    .about-card {
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about-card {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .about-header {
+        font-size: 36px;
+    }
+}
+
+/* Contact Section */
+#contact {
+    padding: 110px 40px 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+}
+
+.contact-container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-header {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.contact-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contact-intro p {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-input {
+    flex: 1;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: rgba(0, 200, 255, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.form-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: rgba(0, 200, 255, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.send-btn {
+    width: 100%;
+    padding: 15px 30px;
+    background: rgba(0, 200, 255, 0.9);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    background: rgba(0, 200, 255, 0.9);
+    transform: translateY(-2px);
+}
+
+.send-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.contact-name {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 80px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    color: rgba(0, 200, 255, 0.9);
+    transform: translateY(-3px);
+}
+
+.social-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .contact-header {
+        font-size: 36px;
+    }
+}
+
+/* Bottom corner image - appears when scrolling to bottom */
+/* EDIT: Adjust size and position below */
+#bottom-image-container {
+    position: fixed;
+    /* EDIT: Adjust bottom position (distance from bottom edge) */
+    bottom: -17px;
+    /* EDIT: Adjust right position (distance from right edge) */
+    right: 0;
+    z-index: 200;
+    pointer-events: none;
+    transform: translateY(100%);
+    transition: transform 0.6s ease-out;
+}
+
+#bottom-image-container.visible {
+    transform: translateY(0);
+}
+
+#bottom-image {
+    /* EDIT: Change width to adjust image size (e.g., 150px, 250px, 300px) */
+    width: 80px;
+    height: auto;
+    /* EDIT: Adjust opacity (0.0 to 1.0, where 1.0 is fully opaque) */
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    #bottom-image {
+        /* EDIT: Mobile width */
+        width: 40px;
+    }
+}
+
+/* Hide body initially to prevent flash of content at wrong scroll position */
+body {
+    opacity: 0;
+}
+
+body.visible {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
